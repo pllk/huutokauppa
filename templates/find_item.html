@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Etsi ilmoitus</title>
+</head>
+
+<body>
+  <h1>Etsi ilmoitus</h1>
+  
+  <form action="/find_item" method="get">
+    <p>
+      Hakusana: <input type="text" name="query" value="{{ query }}">
+    </p>
+    <input type="submit" value="Lähetä">
+  </form>
+  
+  <p>
+    <a href="/">Takaisin</a>
+  </p>
+  
+  {% if query %}
+  <h2>Tulokset</h2>
+  
+  <ul>
+    {% for item in results %}
+    <li><a href="/item/{{ item.id }}">{{ item.title }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</body>
+
+</html>
