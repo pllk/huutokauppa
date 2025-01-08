@@ -10,6 +10,7 @@
   {% if session.user_id == item.user_id %}
   <p>
     <a href="/edit_item/{{ item.id }}">Muokkaa</a>
+    <a href="/remove_item/{{ item.id }}">Poista</a>
   </p>
   {% endif %}
   <p>
