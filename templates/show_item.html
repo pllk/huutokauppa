@@ -11,8 +11,12 @@
   <p>
     <a href="/edit_item/{{ item.id }}">Muokkaa</a>
     <a href="/remove_item/{{ item.id }}">Poista</a>
+    <a href="/images/{{ item.id }}">Kuvat</a>
   </p>
   {% endif %}
+  {% for image in images %}
+  <img src="/image/{{ image.id}}" />
+  {% endfor %}
   <p>
     {{ item.description }}
   </p>

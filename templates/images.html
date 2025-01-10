@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Ilmoituksen kuvat</title>
+</head>
+
+<body>
+  <h1>Ilmoituksen kuvat</h1>
+
+  <p>
+    Ilmoituksessa on {{ images | count }} kuvaa.
+  </p>
+  
+  <h2>Lisää uusi kuva</h2>
+  <form action="/add_image" method="post" enctype="multipart/form-data">
+    <p>
+      Kuva: <input type="file" name="image" accept=".png" />
+    </p>
+    <input type="hidden" name="item_id" value="{{ item.id }}">
+    <input type="submit" value="Lähetä" />
+  </form>
+
+  <p>
+    <a href="/item/{{ item.id }}">Takaisin</a>
+  </p>
+</body>
+
+</html>
