@@ -12,6 +12,18 @@
     Ilmoituksessa on {{ images | count }} kuvaa.
   </p>
   
+  <form action="/remove_images" method="post">
+    {% for image in images %}
+    <input type="checkbox" name="image_id" value="{{ image.id }}">
+    <img src="/image/{{ image.id }}" />
+    <br />
+    {% endfor %}
+    <input type="hidden" name="item_id" value="{{ item.id }}">
+    <p>
+      <input type="submit" value="Poista valitut" />
+    </p>
+  </form>
+
   <h2>Lisää uusi kuva</h2>
   <form action="/add_image" method="post" enctype="multipart/form-data">
     <p>

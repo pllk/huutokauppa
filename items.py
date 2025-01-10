@@ -55,10 +55,13 @@ def add_image(item_id, image):
     db.execute(sql, [item_id, image])
 
 def get_image(image_id):
-    print(image_id)
     sql = "SELECT image FROM images WHERE id = ?"
     result = db.query(sql, [image_id])
     return result[0][0] if result else None
+
+def remove_image(item_id, image_id):
+    sql = "DELETE FROM images WHERE id = ? AND item_id = ?"
+    db.execute(sql, [image_id, item_id])
 
 def get_classes(item_id):
     sql = "SELECT title, value FROM item_classes WHERE item_id = ?"
