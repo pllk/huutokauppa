@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Käyttäjä {{ user.username }}</title>
+</head>
+
+<body>
+  <h1>Käyttäjä {{ user.username }}</h1>
+  <p>
+    Käyttäjällä on yhteensä {{ items | count }} ilmoitusta.
+  </p>
+  <h2>Ilmoitukset</h2>
+  <ul>
+    {% for item in items %}
+    <li><a href="/item/{{ item.id }}">{{ item.title }}</a></li>
+    {% endfor %}
+  </ul>
+  <p>
+    <a href="/">Takaisin</a>
+  </p>
+</body>
+
+</html>
