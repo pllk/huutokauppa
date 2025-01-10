@@ -44,7 +44,8 @@ def show_item(item_id):
         abort(404)
     classes = items.get_classes(item_id)
     bids = items.get_bids(item_id)
-    return render_template("show_item.html", item=item, classes=classes, bids=bids)
+    minimum_bid = items.get_minimum_bid(item_id)
+    return render_template("show_item.html", item=item, classes=classes, bids=bids, minimum_bid=minimum_bid)
 
 @app.route("/new_item")
 def new_item():
@@ -90,11 +91,16 @@ def create_bid():
     price = request.form["price"]
     if not re.search("^[1-9][0-9]{0,3}$", price):
         abort(403)
+    price = int(price)
     item_id = request.form["item_id"]
     item = items.get_item(item_id)
     if not item:
         abort(403)
     user_id = session["user_id"]
+
+    minimum_bid = items.get_minimum_bid(item_id)
+    if price < minimum_bid:
+        return "VIRHE: Liian pieni huuto"
 
     items.add_bid(item_id, user_id, price)
 
