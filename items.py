@@ -23,6 +23,18 @@ def add_item(title, description, start_price, user_id, classes):
     for title, value in classes:
         db.execute(sql, [item_id, title, value])
 
+def add_bid(item_id, user_id, price):
+    sql = """INSERT INTO bids (item_id, user_id, price)
+             VALUES (?, ?, ?)"""
+    db.execute(sql, [item_id, user_id, price])
+
+def get_bids(item_id):
+    sql = """SELECT bids.price, users.id user_id, users.username
+             FROM bids, users
+             WHERE bids.item_id = ? AND bids.user_id = users.id
+             ORDER BY bids.id DESC"""
+    return db.query(sql, [item_id])
+
 def get_classes(item_id):
     sql = "SELECT title, value FROM item_classes WHERE item_id = ?"
     return db.query(sql, [item_id])

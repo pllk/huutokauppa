@@ -43,7 +43,8 @@ def show_item(item_id):
     if not item:
         abort(404)
     classes = items.get_classes(item_id)
-    return render_template("show_item.html", item=item, classes=classes)
+    bids = items.get_bids(item_id)
+    return render_template("show_item.html", item=item, classes=classes, bids=bids)
 
 @app.route("/new_item")
 def new_item():
@@ -81,6 +82,23 @@ def create_item():
     items.add_item(title, description, start_price, user_id, classes)
 
     return redirect("/")
+
+@app.route("/create_bid", methods=["POST"])
+def create_bid():
+    require_login()
+
+    price = request.form["price"]
+    if not re.search("^[1-9][0-9]{0,3}$", price):
+        abort(403)
+    item_id = request.form["item_id"]
+    item = items.get_item(item_id)
+    if not item:
+        abort(403)
+    user_id = session["user_id"]
+
+    items.add_bid(item_id, user_id, price)
+
+    return redirect("/item/" + str(item_id))
 
 @app.route("/edit_item/<int:item_id>")
 def edit_item(item_id):
