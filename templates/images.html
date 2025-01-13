@@ -26,7 +26,8 @@
 <h4>Lisää uusi kuva</h4>
 <form action="/add_image" method="post" enctype="multipart/form-data">
   <p>
-    Kuva: <input type="file" name="image" accept=".png" />
+    <label for="image">Kuva</label>:
+    <input type="file" name="image" id="image" accept=".png" />
   </p>
   <input type="hidden" name="item_id" value="{{ item.id }}">
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />

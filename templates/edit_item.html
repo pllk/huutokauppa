@@ -7,18 +7,18 @@
 <h3>Ilmoituksen muokkaus</h3>
 <form action="/update_item" method="post">
   <p>
-    Otsikko: <br />
-    <input type="text" name="title" value="{{ item.title }}" maxlength="50" required />
+    <label for="title">Otsikko</label>: <br />
+    <input type="text" name="title" id="title" value="{{ item.title }}" maxlength="50" required />
   </p>
   <p>
-    Kuvaus: <br />
-    <textarea name="description" rows="8" cols="60" maxlength="1000" required>{{ item.description }}</textarea>
+    <label for="description">Kuvaus</label>: <br />
+    <textarea name="description" id="description" rows="8" cols="60" maxlength="1000" required>{{ item.description }}</textarea>
   </p>
   <input type="hidden" name="item_id" value="{{ item.id }}" />
   {% for class in all_classes %}
   <p>
-    {{ class }}: <br />
-    <select name="classes">
+    <label for="class{{ class }}">{{ class }}</a>: <br />
+    <select name="classes" id="class{{ class}}">
       <option value="">(valitse)</option>
     {% for option in all_classes[class] %}
       {% if classes[class] == option %}
