@@ -17,28 +17,22 @@
 <p>
   {{ item.description }}
 </p>
-<p>
-  Lähtöhinta: {{ item.start_price }} €
-</p>
-<p>
-  Ilmoittaja: <a href="/user/{{ item.user_id }}">{{ item.username }}</a>
-</p>
+<ul>
+  <li>Lähtöhinta: {{ item.start_price }} €</li>
+  <li>Ilmoittaja: <a href="/user/{{ item.user_id }}">{{ item.username }}</a></li>
 {% if classes %}
-<p>
-  Luokat:
-  <ul>
-    {% for class in classes %}
-    <li>{{ class.title}}: {{ class.value }}</li>
-    {% endfor %}
-  </ul>
-</p>
+  {% for class in classes %}
+  <li>{{ class.title}}: {{ class.value }}</li>
+  {% endfor %}
 {% endif %}
+</ul>
 <h3>Huudot</h3>
 <ul>
   {% for bid in bids %}
   <li>{{ bid.price }} €, <a href="/user/{{ bid.user_id }}">{{ bid.username }}</a></li>
   {% endfor %}
 </ul>
+{% if session.user_id %}
 <h3>Uusi huuto</h3>
 <form action="/create_bid" method="post">
   Tarjous:
@@ -46,4 +40,5 @@
   <input type="hidden" name="item_id" value="{{ item.id }}">
   <input type="submit" value="Huuda" />
 </form>
+{% endif %}
 {% endblock %}
