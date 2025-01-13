@@ -10,23 +10,19 @@
 
   {% if session.username %}
   <p>
-    Olet kirjautunut nimellä {{ session.username }}, id-numerosi on {{ session.user_id }}
-  </p>
-  <p>  
-    <a href="/logout">Kirjaudu ulos</a>
-  </p>
-  <p>
-    <a href="/new_item">Uusi ilmoitus</a>
-  </p>
-  {% else %}
-  <p>
-    <a href="/login">Kirjaudu sisään</a>
-    <a href="/register">Luo tunnus</a>
+    Olet kirjautunut nimellä {{ session.username }}
   </p>
   {% endif %}
 
   <p>
-    <a href="/find_item">Etsi ilmoitus</a>
+    <a href="/find_item">Etsi ilmoitus</a> |
+  {% if session.user_id %}
+    <a href="/new_item">Uusi ilmoitus</a> |
+    <a href="/logout">Kirjaudu ulos</a>
+  {% else %}
+    <a href="/login">Kirjaudu sisään</a> |
+    <a href="/register">Luo tunnus</a>
+  {% endif %}
   </p>
 
   <h2>Ilmoitukset</h2>
