@@ -40,8 +40,8 @@ def show_user(user_id):
     user = users.get_user(user_id)
     if not user:
         abort(404)
-    items = users.get_items(user_id)
-    return render_template("show_user.html", user=user, items=items)
+    user_items = users.get_items(user_id)
+    return render_template("show_user.html", user=user, items=user_items)
 
 @app.route("/find_item")
 def find_item():
@@ -62,7 +62,8 @@ def show_item(item_id):
     bids = items.get_bids(item_id)
     minimum_bid = items.get_minimum_bid(item_id)
     images = items.get_images(item_id)
-    return render_template("show_item.html", item=item, classes=classes, bids=bids, minimum_bid=minimum_bid, images=images)
+    return render_template("show_item.html", item=item, classes=classes,
+                           bids=bids, minimum_bid=minimum_bid, images=images)
 
 @app.route("/image/<int:image_id>")
 def show_image(image_id):
