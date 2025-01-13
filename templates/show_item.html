@@ -15,7 +15,7 @@
 <img src="/image/{{ image.id}}" />
 {% endfor %}
 <p>
-  {{ item.description }}
+  {{ item.description | show_lines }}
 </p>
 <ul>
   <li>Lähtöhinta: {{ item.start_price }} €</li>
