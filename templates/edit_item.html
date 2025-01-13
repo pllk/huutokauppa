@@ -1,39 +1,34 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Ilmoituksen muokkaus</title>
-</head>
+{% block title %}Ilmoituksen muokkaus{% endblock %}
 
-<body>
-  <h1>Ilmoituksen muokkaus</h1>
-  <form action="/update_item" method="post">
-    <p>
-      Otsikko: <br />
-      <input type="text" name="title" value="{{ item.title }}" maxlength="50" required />
-    </p>
-    <p>
-      Kuvaus: <br />
-      <textarea name="description" rows="8" cols="60" maxlength="1000" required>{{ item.description }}</textarea>
-    </p>
-    <input type="hidden" name="item_id" value="{{ item.id }}" />
-    {% for class in all_classes %}
-    <p>
-      {{ class }}: <br />
-      <select name="classes">
-        <option value="">(valitse)</option>
-      {% for option in all_classes[class] %}
-        {% if classes[class] == option %}
-        <option value="{{ class }}:{{ option }}" selected>{{ option }}</option>
-        {% else %}
-        <option value="{{ class }}:{{ option }}">{{ option }}</option>
-        {% endif %}
-      {% endfor %}
-      </select>
-    </p>
+{% block content %}
+<h2>Ilmoituksen muokkaus</h2>
+<form action="/update_item" method="post">
+  <p>
+    Otsikko: <br />
+    <input type="text" name="title" value="{{ item.title }}" maxlength="50" required />
+  </p>
+  <p>
+    Kuvaus: <br />
+    <textarea name="description" rows="8" cols="60" maxlength="1000" required>{{ item.description }}</textarea>
+  </p>
+  <input type="hidden" name="item_id" value="{{ item.id }}" />
+  {% for class in all_classes %}
+  <p>
+    {{ class }}: <br />
+    <select name="classes">
+      <option value="">(valitse)</option>
+    {% for option in all_classes[class] %}
+      {% if classes[class] == option %}
+      <option value="{{ class }}:{{ option }}" selected>{{ option }}</option>
+      {% else %}
+      <option value="{{ class }}:{{ option }}">{{ option }}</option>
+      {% endif %}
     {% endfor %}
-    <input type="submit" value="Päivitä ilmoitusta" />
-  </form>
-</body>
-
-</html>
+    </select>
+  </p>
+  {% endfor %}
+  <input type="submit" value="Päivitä ilmoitusta" />
+</form>
+{% endblock %}

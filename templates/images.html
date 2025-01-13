@@ -1,41 +1,32 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Ilmoituksen kuvat</title>
-</head>
+{% block title %}Ilmoituksen kuvat{% endblock %}
 
-<body>
-  <h1>Ilmoituksen kuvat</h1>
+{% block content %}
+<h2>Ilmoituksen kuvat</h2>
 
+<p>
+  Ilmoituksessa on {{ images | count }} kuvaa.
+</p>
+
+<form action="/remove_images" method="post">
+  {% for image in images %}
+  <input type="checkbox" name="image_id" value="{{ image.id }}">
+  <img src="/image/{{ image.id }}" />
+  <br />
+  {% endfor %}
+  <input type="hidden" name="item_id" value="{{ item.id }}">
   <p>
-    Ilmoituksessa on {{ images | count }} kuvaa.
+    <input type="submit" value="Poista valitut" />
   </p>
-  
-  <form action="/remove_images" method="post">
-    {% for image in images %}
-    <input type="checkbox" name="image_id" value="{{ image.id }}">
-    <img src="/image/{{ image.id }}" />
-    <br />
-    {% endfor %}
-    <input type="hidden" name="item_id" value="{{ item.id }}">
-    <p>
-      <input type="submit" value="Poista valitut" />
-    </p>
-  </form>
+</form>
 
-  <h2>Lisää uusi kuva</h2>
-  <form action="/add_image" method="post" enctype="multipart/form-data">
-    <p>
-      Kuva: <input type="file" name="image" accept=".png" />
-    </p>
-    <input type="hidden" name="item_id" value="{{ item.id }}">
-    <input type="submit" value="Lähetä" />
-  </form>
-
+<h3>Lisää uusi kuva</h3>
+<form action="/add_image" method="post" enctype="multipart/form-data">
   <p>
-    <a href="/item/{{ item.id }}">Takaisin</a>
+    Kuva: <input type="file" name="image" accept=".png" />
   </p>
-</body>
-
-</html>
+  <input type="hidden" name="item_id" value="{{ item.id }}">
+  <input type="submit" value="Lähetä" />
+</form>
+{% endblock %}
