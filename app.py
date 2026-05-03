@@ -109,9 +109,9 @@ def create_item():
                 abort(403)
             classes.append((class_title, class_value))
 
-    items.add_item(title, description, start_price, user_id, classes)
 
-    item_id = db.last_insert_id()
+
+    item_id = items.add_item(title, description, start_price, user_id, classes)
     return redirect("/item/" + str(item_id))
 
 @app.route("/create_bid", methods=["POST"])
